@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who pays for health care</title>
+<style>
+:root{--bg:#fbfaf7;--fg:#1d2330;--mut:#5d6677;--card:#fff;--line:#dedbd2;--a:#2f5d8a;--b:#c8553d;--c:#5b8e7d;--d:#e09f3e}
+@media(prefers-color-scheme:dark){:root{--bg:#14171d;--fg:#e8e6df;--mut:#9aa3b2;--card:#1b1f27;--line:#2c323d;--a:#7aa7d6;--b:#e0806a;--c:#7fb5a3;--d:#e8b35c}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,Segoe UI,sans-serif}
+main{max-width:980px;margin:0 auto;padding:28px 16px 60px}h1{font-size:1.7rem;margin:0 0 6px}h2{font-size:1.1rem;margin:0 0 4px}
+p.lead{color:var(--mut);margin:0 0 20px;max-width:70ch}.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:22px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}.stat b{display:block;font-size:1.5rem}.stat span{color:var(--mut);font-size:.85rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:18px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:8px 0 10px}input,select{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
+svg{width:100%;height:auto;display:block}text{fill:var(--mut);font-size:11px}.ttl{fill:var(--fg)}.note{color:var(--mut);font-size:.85rem;margin:8px 0 0}
+.lg span{display:inline-flex;align-items:center;gap:5px;margin-right:14px;font-size:.85rem;color:var(--mut)}.lg i{width:12px;height:3px;display:inline-block}
+a{color:var(--a)}
+</style></head><body><main>
+<h1>Who pays for health care?</h1>
+<p class="lead">WHO health expenditure data for 195 countries, 2000 to 2023. Pick a country to see how its financing mix has changed against countries at a similar spending level, and where it sits on the spending and life expectancy curve.</p>
+<div class="grid" id="facts"></div>
+<section><h2>Country explorer</h2>
+<div class="row"><label>Country <input id="q" list="cl" placeholder="Start typing" value="Ireland"></label><datalist id="cl"></datalist><span id="meta" class="note"></span></div>
+<div class="lg"><span><i style="background:var(--b)"></i>Out-of-pocket share</span><span><i style="background:var(--a)"></i>Compulsory schemes share</span><span><i style="background:var(--mut);height:0;border-top:2px dashed var(--mut)"></i>Median out-of-pocket share, same spending tier</span></div>
+<svg id="s1" viewBox="0 0 900 300" role="img" aria-label="Financing shares over time"></svg>
+<p class="note">Shares are percentages of total health spending. Tiers are quarters of countries ranked on 2019 spending per person (constant 2023 US$).</p></section>
+<section><h2>Spending and life expectancy, 2019</h2>
+<div class="row"><label>Highlight <select id="hl"><option value="all">all countries</option><option value="eu">EU27</option><option value="t1">lowest spending quarter</option><option value="t4">highest spending quarter</option></select></label></div>
+<svg id="s2" viewBox="0 0 900 380" role="img" aria-label="Life expectancy against spending"></svg>
+<p class="note">Each dot is a country. The selected country from the explorer is ringed. Association only: income, age structure, disease burden and many other factors differ across countries.</p></section>
+<p class="note">Sources: WHO Global Health Expenditure Database, World Bank population, Our World in Data life expectancy. Per-person spending is in constant 2023 US$, not adjusted for purchasing power.</p>
+</main>
+<script>
+const D=__DATA__,F=__FACTS__,Y=Array.from({length:24},(_,i)=>2000+i);
+const $=id=>document.getElementById(id),NS="http://www.w3.org/2000/svg";
+const med=a=>{a=a.filter(v=>v!=null).sort((x,y)=>x-y);if(!a.length)return null;const m=a.length>>1;return a.length%2?a[m]:(a[m-1]+a[m])/2};
+$("facts").innerHTML=[[F.rho_oop_comp.spearman_rho.toFixed(2),"rank correlation between out-of-pocket and compulsory shares, 2023 (95% CI "+F.rho_oop_comp.ci95.map(v=>v.toFixed(2)).join(" to ")+")"],
+[F.rho_oop_spend.spearman_rho.toFixed(2),"rank correlation between out-of-pocket share and spending per person, 2023"],
+["+"+F.covid21.toFixed(1)+"%","median change in spending per person, 2021 vs 2019 (95% CI "+F.covid21_ci.map(v=>v.toFixed(1)).join(" to ")+")"],
+["+"+F.gain.toFixed(1)+" yrs","life expectancy gap per doubling of spending near US$300 (about +"+F.gain3000.toFixed(1)+" near US$3,000)"]].map(([a,b])=>`<div class="stat"><b>${a}</b><span>${b}</span></div>`).join("");
+$("cl").innerHTML=D.map(d=>`<option value="${d.n}">`).join("");
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+function axes(s,W,H,m,xs,ys,xl,yl,xt,yt){const g=el("g",{},s);yt.forEach(v=>{el("line",{x1:m.l,x2:W-m.r,y1:ys(v),y2:ys(v),stroke:"var(--line)"},g);const t=el("text",{x:m.l-6,y:ys(v)+4,"text-anchor":"end"},g);t.textContent=yl(v)});
+xt.forEach(v=>{const t=el("text",{x:xs(v),y:H-m.b+16,"text-anchor":"middle"},g);t.textContent=xl(v)})}
+let cur=D.find(d=>d.n==="Ireland");
+function explorer(){const s=$("s1");s.innerHTML="";const W=900,H=300,m={l:44,r:14,t:10,b:28};const xs=y=>m.l+(y-2000)/23*(W-m.l-m.r),ys=v=>H-m.b-v/100*(H-m.t-m.b);
+axes(s,W,H,m,xs,ys,v=>v,v=>v+"%",[2000,2005,2010,2015,2020,2023],[0,25,50,75,100]);
+const path=(arr,c,dash)=>{let d="",on=false;arr.forEach((v,i)=>{if(v==null){on=false;return}d+=(on?"L":"M")+xs(Y[i]).toFixed(1)+" "+ys(v).toFixed(1);on=true});el("path",{d,fill:"none",stroke:c,"stroke-width":2.2,"stroke-dasharray":dash||"none"},s)};
+const peers=D.filter(d=>d.t===cur.t&&d.i!==cur.i);if(cur.t)path(Y.map((_,i)=>med(peers.map(d=>d.oop[i]))),"var(--mut)","5 4");
+path(cur.comp,"var(--a)");path(cur.oop,"var(--b)");
+const last=cur.pc.filter(v=>v!=null).slice(-1)[0];
+$("meta").textContent=cur.n+": "+(cur.t?"spending tier "+cur.t+" of 4":"no 2019 spending data")+(last?"; latest spending per person about US$"+Math.round(last).toLocaleString():"")+(cur.eu?"; EU27 member":"")}
+function scatter(){const s=$("s2");s.innerHTML="";const W=900,H=380,m={l:48,r:14,t:10,b:36};const pts=D.map(d=>({d,x:d.pc[19],y:d.le[19]})).filter(p=>p.x>0&&p.y);
+const lx=Math.log10,x0=lx(10),x1=lx(15000),y0=50,y1=88;const xs=v=>m.l+(lx(v)-x0)/(x1-x0)*(W-m.l-m.r),ys=v=>H-m.b-(v-y0)/(y1-y0)*(H-m.t-m.b);
+axes(s,W,H,m,xs,ys,v=>"$"+v.toLocaleString(),v=>v,[10,100,1000,10000],[50,60,70,80]);
+const f=$("hl").value,on=d=>f==="all"||(f==="eu"&&d.eu)||(f==="t1"&&d.t===1)||(f==="t4"&&d.t===4);
+const g=el("g",{},s);pts.forEach(p=>{const a=on(p.d);const c=el("circle",{cx:xs(p.x),cy:ys(p.y),r:a?4:3,fill:a?"var(--a)":"var(--mut)",opacity:a?.85:.25},g);el("title",{},c).textContent=`${p.d.n}: US$${Math.round(p.x).toLocaleString()} per person, life expectancy ${p.y.toFixed(1)}`});
+const me=pts.find(p=>p.d.i===cur.i);if(me)el("circle",{cx:xs(me.x),cy:ys(me.y),r:9,fill:"none",stroke:"var(--b)","stroke-width":2.4},s);
+const t=el("text",{x:(W+m.l)/2,y:H-4,"text-anchor":"middle"},s);t.textContent="Health spending per person, 2019 (log scale)"}
+function pick(){const v=$("q").value.trim().toLowerCase();const d=D.find(d=>d.n.toLowerCase()===v);if(d){cur=d;explorer();scatter()}}
+$("q").addEventListener("input",pick);$("q").addEventListener("change",pick);$("hl").addEventListener("change",scatter);explorer();scatter();
+</script></body></html>

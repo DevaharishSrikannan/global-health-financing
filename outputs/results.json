@@ -1,0 +1,327 @@
+{
+ "data_quality": {
+  "country_years": 4588,
+  "countries": 195,
+  "years": [
+   2000,
+   2023
+  ],
+  "duplicate_country_years": 0,
+  "missing_population_countries": [
+   "COK",
+   "NIU"
+  ],
+  "share_sum_gov_pvt_ext_outside_99_101": 0,
+  "scheme_shares_unresolved_rest_of_world": 0,
+  "negative_spending": 0,
+  "life_expectancy_coverage_2019": 195
+ },
+ "tier_cutpoints_usd_2019": [
+  80.00499830651584,
+  408.3246564666367,
+  1394.7112540202952,
+  12690.605393887156
+ ],
+ "mix_by_tier": {
+  "tier1": {
+   "oop_median_2000": 55.999155336646325,
+   "oop_median_2023": 44.58317591626073,
+   "compulsory_median_2000": 32.69433990736379,
+   "compulsory_median_2023": 37.489269673495514
+  },
+  "tier2": {
+   "oop_median_2000": 40.249782241296906,
+   "oop_median_2023": 27.642279548173548,
+   "compulsory_median_2000": 50.04038930905587,
+   "compulsory_median_2023": 58.95944892146792
+  },
+  "tier3": {
+   "oop_median_2000": 33.56169475030035,
+   "oop_median_2023": 28.438028512910613,
+   "compulsory_median_2000": 53.52838959040335,
+   "compulsory_median_2023": 64.91986360646902
+  },
+  "tier4": {
+   "oop_median_2000": 20.338961804119197,
+   "oop_median_2023": 14.944037963298683,
+   "compulsory_median_2000": 72.05238715712807,
+   "compulsory_median_2023": 76.41906928577274
+  }
+ },
+ "oop_vs_spending_2023": {
+  "spearman_rho": -0.4737289887021218,
+  "ci95": [
+   -0.5762946388734488,
+   -0.35711906318721587
+  ],
+  "n": 191
+ },
+ "oop_vs_compulsory_share_2023": {
+  "spearman_rho": -0.8356709837420777,
+  "ci95": [
+   -0.8935111380959347,
+   -0.7657395940639178
+  ],
+  "n": 191
+ },
+ "top_oop_2023": [
+  {
+   "country": "Armenia",
+   "oop_share": 80.5,
+   "che_pc_usd": 761.5
+  },
+  {
+   "country": "Bangladesh",
+   "oop_share": 79.3,
+   "che_pc_usd": 53.5
+  },
+  {
+   "country": "Turkmenistan",
+   "oop_share": 77.4,
+   "che_pc_usd": 581.4
+  },
+  {
+   "country": "Afghanistan",
+   "oop_share": 77.1,
+   "che_pc_usd": 59.1
+  },
+  {
+   "country": "Syrian Arab Republic",
+   "oop_share": 72.4,
+   "che_pc_usd": 33.3
+  },
+  {
+   "country": "Nigeria",
+   "oop_share": 71.9,
+   "che_pc_usd": 66.8
+  },
+  {
+   "country": "Myanmar",
+   "oop_share": 71.1,
+   "che_pc_usd": 56.2
+  },
+  {
+   "country": "Yemen",
+   "oop_share": 69.1,
+   "che_pc_usd": 47.8
+  }
+ ],
+ "countries_oop_ge_40pct_2023": {
+  "n": 56,
+  "of": 191,
+  "median_spend_pc_usd": 94.20406827352872
+ },
+ "countries_oop_le_15pct_2023": 51,
+ "covid": {
+  "n": 191,
+  "2021": {
+   "median_pct_change": 10.533887583562219,
+   "ci95": [
+    7.6035653063667885,
+    12.978047533563352
+   ],
+   "share_of_countries_higher": 0.7958115183246073,
+   "wilcoxon_p": 8.301073520198108e-16,
+   "median_d_compulsory_pp": 2.0472885258468096,
+   "median_d_oop_pp": -1.130939073528328,
+   "ci95_d_oop_pp": [
+    -1.7696990106511237,
+    -0.776430152101895
+   ],
+   "by_tier_median_pct": {
+    "1": 7.435893821574524,
+    "2": 18.374877689697634,
+    "3": 8.091762403512782,
+    "4": 8.706815488027754
+   }
+  },
+  "2023": {
+   "median_pct_change": 8.320250414211872,
+   "ci95": [
+    6.368503290983174,
+    10.424610491831142
+   ],
+   "share_of_countries_higher": 0.743455497382199,
+   "wilcoxon_p": 9.67775550221699e-11,
+   "median_d_compulsory_pp": 0.7944094108688802,
+   "median_d_oop_pp": -0.4934565812974796,
+   "ci95_d_oop_pp": [
+    -1.250058872683038,
+    -0.07170748708964525
+   ],
+   "by_tier_median_pct": {
+    "1": 6.475514975299301,
+    "2": 9.531609908339744,
+    "3": 8.659315714546512,
+    "4": 5.896122899165734
+   }
+  },
+  "median_yoy_by_year": {
+   "2020": 4.004681927355991,
+   "2021": 6.369644469250469,
+   "2022": -2.605034869638845,
+   "2023": 1.1332385953888746
+  }
+ },
+ "spending_vs_life_expectancy_2019": {
+  "n": 192,
+  "r_squared_quadratic_in_log10_spend": 0.6936692741702134,
+  "life_exp_gain_per_doubling_at_300usd": 2.728095439112467,
+  "life_exp_gain_per_doubling_at_3000usd": 2.340827523243948,
+  "ireland": {
+   "spend_pc_usd": 5736.791221324563,
+   "life_expectancy": 82.2586,
+   "residual_years": 0.11773459768954808,
+   "residual_ci95": [
+    -0.7943590240149512,
+    1.0736040316945037
+   ],
+   "rank_of_n": 102
+  },
+  "above_curve_top5": [
+   {
+    "country": "Bangladesh",
+    "che_pc_usd": 43.5,
+    "life_expectancy": 72.8,
+    "resid": 9.3
+   },
+   {
+    "country": "Thailand",
+    "che_pc_usd": 273.8,
+    "life_expectancy": 79.0,
+    "resid": 7.8
+   },
+   {
+    "country": "Syrian Arab Republic",
+    "che_pc_usd": 56.7,
+    "life_expectancy": 71.8,
+    "resid": 7.1
+   },
+   {
+    "country": "Sri Lanka",
+    "che_pc_usd": 158.0,
+    "life_expectancy": 76.0,
+    "resid": 7.0
+   },
+   {
+    "country": "Madagascar",
+    "che_pc_usd": 16.5,
+    "life_expectancy": 65.9,
+    "resid": 6.7
+   }
+  ],
+  "below_curve_bottom5": [
+   {
+    "country": "Lesotho",
+    "che_pc_usd": 222.2,
+    "life_expectancy": 54.2,
+    "resid": -16.2
+   },
+   {
+    "country": "Palau",
+    "che_pc_usd": 2258.8,
+    "life_expectancy": 64.8,
+    "resid": -14.2
+   },
+   {
+    "country": "Nauru",
+    "che_pc_usd": 1319.8,
+    "life_expectancy": 63.5,
+    "resid": -13.7
+   },
+   {
+    "country": "Tuvalu",
+    "che_pc_usd": 1301.8,
+    "life_expectancy": 64.3,
+    "resid": -12.8
+   },
+   {
+    "country": "Marshall Islands",
+    "che_pc_usd": 945.3,
+    "life_expectancy": 64.7,
+    "resid": -11.2
+   }
+  ]
+ },
+ "profiles_2019": {
+  "silhouette_by_k": {
+   "2": 0.4705156842316478,
+   "3": 0.4206456372133054,
+   "4": 0.4631059389463281,
+   "5": 0.42075282186342783,
+   "6": 0.4370044256287641,
+   "7": 0.4505103520087312
+  },
+  "chosen_k": 2,
+  "bootstrap_ari_median": 0.9386772234984476,
+  "bootstrap_ari_p10": 0.8214438017529214,
+  "centroids": [
+   {
+    "compulsory_share": 70.8,
+    "voluntary_share": 9.4,
+    "oop_share": 19.5,
+    "row_share": 0.1,
+    "n": 118
+   },
+   {
+    "compulsory_share": 35.0,
+    "voluntary_share": 14.7,
+    "oop_share": 50.1,
+    "row_share": 0.2,
+    "n": 76
+   }
+  ],
+  "ireland_cluster": 0
+ },
+ "ireland_vs_eu27": {
+  "2000": {
+   "n_eu": 27,
+   "spend_pc_usd": 2851.5248745169642,
+   "eu_median_spend_pc_usd": 1608.6261506142664,
+   "spend_rank": 10,
+   "oop_share": 12.117088176435368,
+   "eu_median_oop_share": 20.204310512970547,
+   "oop_rank_high_to_low": 22,
+   "compulsory_share": 77.5144652452873,
+   "eu_median_compulsory_share": 74.1233654677259,
+   "voluntary_share": 10.36844657827732,
+   "eu_median_voluntary_share": 4.249570587093125
+  },
+  "2019": {
+   "n_eu": 27,
+   "spend_pc_usd": 5736.791221324561,
+   "eu_median_spend_pc_usd": 2601.426453597841,
+   "spend_rank": 7,
+   "oop_share": 12.656584651627009,
+   "eu_median_oop_share": 19.159362156528605,
+   "oop_rank_high_to_low": 21,
+   "compulsory_share": 73.82551309279661,
+   "eu_median_compulsory_share": 74.37536940612858,
+   "voluntary_share": 13.517902255534803,
+   "eu_median_voluntary_share": 4.703069314131936
+  },
+  "2023": {
+   "n_eu": 27,
+   "spend_pc_usd": 6825.955724231304,
+   "eu_median_spend_pc_usd": 3032.766159247559,
+   "spend_rank": 2,
+   "oop_share": 11.299472543654726,
+   "eu_median_oop_share": 17.942924738704715,
+   "oop_rank_high_to_low": 23,
+   "compulsory_share": 76.59344624929064,
+   "eu_median_compulsory_share": 76.59344624929064,
+   "voluntary_share": 12.107081207054646,
+   "eu_median_voluntary_share": 4.554213913885221
+  },
+  "preventive_share_2022": {
+   "n_eu_with_data": 27,
+   "eu_median": 4.506736553148313,
+   "ireland": 4.6085925802599865
+  },
+  "preventive_share_2019": {
+   "n_eu_with_data": 27,
+   "eu_median": 2.606293376244292,
+   "ireland": 2.606293376244292
+  }
+ }
+}
